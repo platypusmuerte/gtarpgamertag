@@ -41,33 +41,27 @@ function run(runRequest) {
 				channelData = JSON.parse(data);
 				currentTitle = channelData.name.toLowerCase();
 				currentGame = channelData.type.name.toLowerCase();
-
-				if(currentGame == "grand theft auto v") {
-					if(currentTitle.includes("| rp")) {
-						resolve({
-							success: true,
-							effects: [{
-								type: EffectType.CHAT,
-								message: "This is an PC RP server, not GTA Online on Xbox.",
-								chatter: "Streamer"
-							}]
-						});
-					} else {
-						resolve({
-							success: true,
-							effects: [{
-								type: EffectType.CHAT,
-								message: "My Xbox gamer tag is " + gamerTag,
-								chatter: "Streamer"
-							}]
-						});
-					}
+				
+				if((currentGame == "grand theft auto v") && currentTitle.includes("| rp")) {
+					resolve({
+						success: true,
+						effects: [{
+							type: EffectType.CHAT,
+							message: "This is an PC RP server, not GTA Online on Xbox. But my gamer tag is " + gamerTag,
+							chatter: "Streamer"
+						}]
+					});
 				} else {
 					resolve({
 						success: true,
-						effects: []
+						effects: [{
+							type: EffectType.CHAT,
+							message: "My gamer tag is " + gamerTag,
+							chatter: "Streamer"
+						}]
 					});
 				}
+				
 			} else {
 				resolve({
 					success: true,
